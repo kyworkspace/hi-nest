@@ -33,6 +33,7 @@ nest
 - 데코레이터는 클래스에 함수를 추가하는 기능을 한다. 클래스를 위해 움직인다고 보면 된다. (Spring의 어노테이션 같다.)
 - 데코레이터는 꾸며주는 함수나 클래스랑 붙어있어야 한다. 데코레이터랑 함수사이에 빈칸 X
 - main.ts => 모듈 => 컨트롤러 => 서비스 => Hello World!
+- 터미널 명령어 generate로 많은 것을 생성할 수 있다.
 
 #### AppModule
 
@@ -42,6 +43,25 @@ nest
 
 - 컨트롤러는 기본적으로 url를 가져오고 함수를 실행(리턴)함
 - express의 라우터 같은 역할
+- 생성
+
+  ```
+  PS C:\Projects\nest\hi-nest> nest g co
+  ? What name would you like to use for the controller? movies
+  ```
+
+- @Controller('movies') 는 엔트리 포인트가 /movies 라는 뜻이다.
+
+##### @Get @param
+
+- HTTP Method의 GET의 Parameter를 알고 싶을때는 아래와 같이 작성한다.
+
+```
+@Get('/:id')
+  getOne(@Param('id') id: string) {
+    return `this will return one movie with the id : ${id}`;
+  }
+```
 
 #### Service
 
