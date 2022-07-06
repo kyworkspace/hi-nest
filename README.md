@@ -69,11 +69,17 @@ nest
 
 #### Service
 
+```
+nest g s
+```
+
+- 서비스를 만들면 자동으로 module 에서 임포트 한다.
+- 서비스는 Single-responsiblility principle 을 따른다.
 - NestJS는 url와 비즈니스 로직을 분리한다.
 - controller는 그냥 url를 가져오는 역할
 - 그외 나머지는 service 에서 처리(spring 같은데?)
 - 통상적으로 컨트롤러에서 짓는 함수명을 그대로 서비스로 가져가지만 꼭 그럴필욘 없다.
 
-### Single-responsiblility principle
+##### Single-responsiblility principle
 
 - 하나의 모듈 또는 클래스에서는 한개의 function을 관리한다.
