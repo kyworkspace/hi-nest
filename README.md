@@ -108,3 +108,15 @@ npm i @nestjs/mapped-types
 ```
 
 - 타입을 변환시키고 사용할 수 있게하는 패키지
+- NestJs 같은 제작이다.
+
+#### 모듈 분리
+
+```
+PS C:\Projects\nest\hi-nest> nest g mo
+? What name would you like to use for the module? movies
+```
+
+- app.module에는 AppController와 AppService만 있어야 한다.
+- 각각의 모듈을 독립시키고 분리하기 위해서 각 컨트롤러,서비스를 위한 모듈을 만든다.
+- app.module이 movie.module을 임포트 하는 방식으로 한다.
