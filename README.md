@@ -142,3 +142,62 @@ PS C:\Projects\nest\hi-nest> nest g mo
 - nestjs는 기본적으로 jest가 딸려오면서 package.json에서 test준비가 되어있다.
 - 유닛 테스트는 function 하나만 테스트 해볼때 사용한다.
 - e2e(end-to-end) 테스트는 특정 링크로 가면 특정 페이지가 나와야하는 경우에 사용한다.
+
+```
+movies.service.spec.ts
+```
+
+- 위 파일에서 테스트를 진행해본다.
+
+```
+describe('MoviesService', () => {
+  let service: MoviesService;
+
+  beforeEach(async () => {
+    //테스트를 하기 전에 실행되는 부분
+    ...
+  });
+
+  it('should be defined', () => {
+    expect(service).toBeDefined();
+  });
+
+  it('should be 4', () => {
+    expect(2 + 3).toEqual(5);
+  });
+});
+```
+
+- 위 테스트에서 it 부분이 test:watch를 통해서 보는 각각의 유닛 테스트라고 볼 수 있다.
+- beforeEach, afterEach, beforeAll , afterAll들 여러가지 방면으로 테스트 가능하다.
+
+```
+ PASS  src/movies/movies.service.spec.ts
+  MoviesService
+    √ should be defined (11 ms)
+    √ should be 4 (3 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       2 passed, 2 total
+Snapshots:   0 total
+Time:        3.948 s, estimated 4 s
+Ran all test suites related to changed files.
+```
+
+- 만약 잘못된 값이 들어가면
+
+```
+ FAIL  src/movies/movies.service.spec.ts
+  MoviesService
+    √ should be defined (11 ms)
+    × should be 4 (4 ms)
+
+  ● MoviesService › should be 4
+
+    expect(received).toEqual(expected) // deep equality
+
+    Expected: 5
+    Received: 4
+```
+
+- 위와 같이 나온다.
