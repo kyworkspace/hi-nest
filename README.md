@@ -83,3 +83,28 @@ nest g s
 ##### Single-responsiblility principle
 
 - 하나의 모듈 또는 클래스에서는 한개의 function을 관리한다.
+
+#### Exception
+
+- spring과 비슷하게 NestJS가 기본적으로 제공하는 HttpException들이 여럿있다. NotFoundException.. 등등
+
+#### validation
+
+- Dto 타입을 만들어서 각각에 들어오거나 나오는 데이터를 검증할수 있도록 한다.
+- DTO는 NEST JS가 들어오는 쿼리에 대해 유효성을 검사할 수 있도록 해준다.
+
+#### class-validator, class-transformer 설치
+
+```
+npm i class-validator, class-transformer
+```
+
+- validation pipe를 위한 라이브러리이다.
+
+#### PartialType
+
+```
+npm i @nestjs/mapped-types
+```
+
+- 타입을 변환시키고 사용할 수 있게하는 패키지
