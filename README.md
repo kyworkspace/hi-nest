@@ -120,3 +120,25 @@ PS C:\Projects\nest\hi-nest> nest g mo
 - app.module에는 AppController와 AppService만 있어야 한다.
 - 각각의 모듈을 독립시키고 분리하기 위해서 각 컨트롤러,서비스를 위한 모듈을 만든다.
 - app.module이 movie.module을 임포트 하는 방식으로 한다.
+
+#### Access express
+
+- 각 컨트롤러에서 파라미터로 넘어노는 것을 @Req, @Res로 정의한다.
+
+```
+@Get()
+  getAll(@Req() req, @Res() res): Movie[] {
+    return this.moviesService.getAll();
+  }
+```
+
+- NestJS는 express 위에서 돌아가기 때문에 위와같이 파라미터를 정의하면 express에 접근할 수 있다.
+- req,res에 직접 접근하는 방식은 추천하지 않는다.
+- fastify와 express를 같이 사용한기 때문에 각각의 방식에서만 사용되는 (ex. res.json({~~~})) 방식은 두개의 프레임워크 사이에서 간극이 될 수도 있다.
+- 진짜 필요한 경우말고는 사용을 피하자
+
+### Test
+
+- nestjs는 기본적으로 jest가 딸려오면서 package.json에서 test준비가 되어있다.
+- 유닛 테스트는 function 하나만 테스트 해볼때 사용한다.
+- e2e(end-to-end) 테스트는 특정 링크로 가면 특정 페이지가 나와야하는 경우에 사용한다.
