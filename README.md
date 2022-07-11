@@ -201,3 +201,63 @@ Ran all test suites related to changed files.
 ```
 
 - 위와 같이 나온다.
+
+#### e2e(end - to - end) 테스트
+
+- 페이지 URL 호출에 관련한 테스트이다.
+- 유닛테스트처럼 1개 함수가 아닌 페이지 호출할때 사용된다.
+
+```
+ it('/movies (GET)', () => {
+    //app.getHttpServer() => http://localhost:3000~~~ 같은을 안쓰기 위한 방식
+    return request(app.getHttpServer()).get('/movies').expect(200).expect([]);
+  });
+```
+
+```
+ PASS  test/app.e2e-spec.ts (5.189 s)
+  AppController (e2e)
+    √ / (GET) (356 ms)
+    √ /movies (GET) (17 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       2 passed, 2 total
+
+```
+
+- 작동이 잘 되는 것을 볼 수 있다.
+
+#### TEST APP
+
+- NestJs는 테스트를 할 때 별도의 app을 실행한다. 실제 개발 중이거나 확인을 위해서 브라우저에서 실행한 app과는 별개로 움직인다.
+- 이러한 테스트들은 각각의 테스트 메서드에서 독립적인 앱을 실행시킨다.
+- 그래서 테스트를 위해서 주입한 데이터(ex. Post 테스트를 위한 데이터라던가) 는 휘발된다.
+
+```
+  describe('/movies/:id', () => {
+    it.todo('GET');
+    it.todo('DELETE');
+    it.todo('PATCH');
+  });
+
+--------------------------result-------------------------------------
+
+      ✎ todo GET
+      ✎ todo DELETE
+      ✎ todo PATCH
+
+```
+
+- :id 테스트를 하기 위해서 todo()를 사용하였다.
+- 테스트를 할때마다 새로운 앱을 실행시키고 싶지 않고, 각 테스트마다 한개의 테스트앱이 있으면 좋겠다 싶을때는 beforeAll을 사용한다.
+- 별도의 앱으로 실행되기 때문에 PIPE 조건이 실행앱과 테스트가 다를 수도 있다.
+
+```
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true, //각 data type이 적합하지 않으면 애초에  validation에  들어오지 못함
+      forbidNonWhitelisted: true,
+      transform: true, // 유저들이 보낸 것을 원하는 실제타입으로 바꿔줌
+    }),
+  );
+```
